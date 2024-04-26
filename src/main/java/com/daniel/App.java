@@ -4,7 +4,7 @@ import javax.swing.*;
 
 /**
  * Hello world!
- * // https://www.youtube.com/watch?v=Y62MJny9LHg
+ * // https://www.youtube.com/watch?v=Y62MJny9LHg   min 12:09
  *
  */
 public class App 
@@ -22,5 +22,6 @@ public class App
 
         SnakeGame snakeGame=new SnakeGame(boardWidth,boardHeight);
         frame.add(snakeGame);
+        frame.pack(); //place the frame inside the panel with ful dimensions
     }
 }
