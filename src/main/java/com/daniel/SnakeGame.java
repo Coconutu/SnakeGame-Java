@@ -1,5 +1,9 @@
 package com.daniel;
-
+/**
+ * Snake Game!
+ * // https://www.youtube.com/watch?v=Y62MJny9LHg   min 24:09
+ *
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;

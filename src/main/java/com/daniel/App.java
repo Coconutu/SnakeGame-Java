@@ -2,11 +2,7 @@ package com.daniel;
 
 import javax.swing.*;
 
-/**
- * Hello world!
- * // https://www.youtube.com/watch?v=Y62MJny9LHg   min 24:09
- *
- */
+
 public class App 
 {
     public static void main( String[] args )
