@@ -1,7 +1,7 @@
 package com.daniel;
 /**
  * Snake Game!
- * // https://www.youtube.com/watch?v=Y62MJny9LHg   min 24:09 :)
+ * // https://www.youtube.com/watch?v=Y62MJny9LHg   min 28:48 :)
  *
  */
 import javax.swing.*;
