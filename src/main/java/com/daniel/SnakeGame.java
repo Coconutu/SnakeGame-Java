@@ -34,6 +34,7 @@ public class SnakeGame extends JPanel implements ActionListener,KeyListener{
     Timer gameLoop;
     int velocityX;
     int velocityY;
+    boolean gameOver=false;
 
     SnakeGame(int boardWidth,int boardHeight){
         this.boardWidth=boardWidth;
@@ -46,7 +47,7 @@ public class SnakeGame extends JPanel implements ActionListener,KeyListener{
         food =new Tile(10,10);
         random=new Random();
         placeFood();
-        gameLoop=new Timer(100,this);
+        gameLoop=new Timer(400,this);
         gameLoop.start();
         velocityX=0;
         velocityY=0;
@@ -60,25 +61,37 @@ public class SnakeGame extends JPanel implements ActionListener,KeyListener{
         draw(g);
     }
     public void draw(Graphics g){
-        //Grid
-        for(int i=0;i<boardWidth/tileSize;i++){
-            g.drawLine(i*tileSize,0,i*tileSize,boardHeight); //vertical lines
-            g.drawLine(0,i*tileSize,boardWidth,i*tileSize); //horizontal lines
-        }
+//        //Grid
+//        for(int i=0;i<boardWidth/tileSize;i++){
+//            g.drawLine(i*tileSize,0,i*tileSize,boardHeight); //vertical lines
+//            g.drawLine(0,i*tileSize,boardWidth,i*tileSize); //horizontal lines
+//        }
         //Food
         g.setColor(Color.RED);
-        g.fillRect(food.x*tileSize, food.y*tileSize,tileSize,tileSize);
+        //g.fillRect(food.x*tileSize, food.y*tileSize,tileSize,tileSize);
+        g.fill3DRect(food.x*tileSize, food.y*tileSize,tileSize,tileSize,true);
 
 
         //Snake head
         g.setColor(Color.GREEN);
-        g.fillRect(snakeHead.x*tileSize, snakeHead.y*tileSize,tileSize,tileSize);
+        //g.fillRect(snakeHead.x*tileSize, snakeHead.y*tileSize,tileSize,tileSize);
+        g.fill3DRect(snakeHead.x*tileSize, snakeHead.y*tileSize,tileSize,tileSize,true);
 
         //Snake body
         for(int i=0;i<snakeBody.size();i++)
         {
             Tile snakePart=snakeBody.get(i);
-            g.fillRect(snakePart.x*tileSize,snakePart.y*tileSize,tileSize,tileSize);
+            //g.fillRect(snakePart.x*tileSize,snakePart.y*tileSize,tileSize,tileSize);
+            g.fill3DRect(snakePart.x*tileSize,snakePart.y*tileSize,tileSize,tileSize,true);
+        }
+        //score
+        g.setFont(new Font("Arial",Font.PLAIN,16));
+        if(gameOver){
+            g.setColor(Color.RED);
+            g.drawString("Game Over :"+String.valueOf(snakeBody.size()),tileSize-16,tileSize);
+        }
+        else {
+                g.drawString("Score "+String.valueOf(snakeBody.size()),tileSize-16,tileSize);
         }
     }
         public void placeFood( )
@@ -120,6 +133,21 @@ public class SnakeGame extends JPanel implements ActionListener,KeyListener{
         //Snake head
         snakeHead.x+=velocityX;
         snakeHead.y+=velocityY;
+        //game over conditions
+        for(int i=0;i<snakeBody.size();i++)
+        {
+            Tile snakePart=snakeBody.get(i);
+            //collite with the snake head
+            if (collision(snakeHead,snakePart))
+            {
+                gameOver=true;
+            }
+        }
+        if (snakeHead.x * tileSize < 0||snakeHead.x*tileSize>boardWidth||
+            snakeHead.y*tileSize<0||snakeHead.y*tileSize>boardHeight)
+        {
+            gameOver=true;
+        }
 
     }
 
@@ -127,6 +155,9 @@ public class SnakeGame extends JPanel implements ActionListener,KeyListener{
     public void actionPerformed(java.awt.event.ActionEvent e) {
         move();
         repaint();
+        if(gameOver) {
+            gameLoop.stop();
+        }
 
     }
 
