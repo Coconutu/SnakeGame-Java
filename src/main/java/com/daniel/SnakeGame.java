@@ -1,7 +1,7 @@
 package com.daniel;
 /**
  * Snake Game!
- * // https://www.youtube.com/watch?v=Y62MJny9LHg   min 24:09
+ * // https://www.youtube.com/watch?v=Y62MJny9LHg   min 24:09 :)
  *
  */
 import javax.swing.*;
@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.Random;
 import java.awt.event.*;
 
-public class SnakeGame extends JPanel implements ActionListener{
+public class SnakeGame extends JPanel implements ActionListener,KeyListener{
 
 
     private class Tile{
@@ -45,7 +45,9 @@ public class SnakeGame extends JPanel implements ActionListener{
         gameLoop=new Timer(100,this);
         gameLoop.start();
         velocityX=0;
-        velocityY=1;
+        velocityY=0;
+        addKeyListener(this);
+        setFocusable(true);
 
     }
     public void paintComponent(Graphics g)
@@ -87,4 +89,36 @@ public class SnakeGame extends JPanel implements ActionListener{
         repaint();
 
     }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode()==KeyEvent.VK_UP && velocityY!=1)
+        {
+            velocityX=0;
+            velocityY=-1;
+        }
+        else if (e.getKeyCode()==KeyEvent.VK_DOWN && velocityY!=-1)
+        {
+            velocityX=0;
+            velocityY=1;
+        } else if (e.getKeyCode()==KeyEvent.VK_LEFT && velocityX!=1)
+        {
+            velocityX=-1;
+            velocityY=0;
+
+        } else if (e.getKeyCode()==KeyEvent.VK_RIGHT && velocityX!=-1)
+        {
+            velocityX=1;
+            velocityY=0;
+
+        }
+
+    }
+//DO NOT NEED
+    @Override
+    public void keyTyped(KeyEvent e) {}
+    @Override
+    public void keyReleased(KeyEvent e) {}
+
+
 }
