@@ -14,4 +14,4 @@
 
 *Check collision and out of bounds for game over.
 
-![](/home/daniel/Poze/Screenshot from 2024-04-30 23-05-33.png)
+<img src="Screenshot from 2024-04-30 23-05-33.png"/>
