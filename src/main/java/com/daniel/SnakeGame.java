@@ -47,7 +47,7 @@ public class SnakeGame extends JPanel implements ActionListener,KeyListener{
         food =new Tile(10,10);
         random=new Random();
         placeFood();
-        gameLoop=new Timer(400,this);
+        gameLoop=new Timer(150,this);
         gameLoop.start();
         velocityX=0;
         velocityY=0;
